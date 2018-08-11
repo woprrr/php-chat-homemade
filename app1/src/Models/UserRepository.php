@@ -53,7 +53,7 @@ final class UserRepository implements UserRepositoryInterface
         $user = null;
         if ($stmt->execute()) {
             $stmt->setFetchMode(PDO::FETCH_CLASS, User::class);
-            $user = $stmt->fetch();
+            $user = empty($stmt->rowCount()) ? NULL : $stmt->fetch();
         }
 
         return $user;
