@@ -15,56 +15,53 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Register
 {
+    use BaseControllerTrait;
 
-  use BaseControllerTrait;
-
-  /**
-   * Controller of register page.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function register(Request $request): Response
-  {
-    $this->init('You\'r already loggedIn', '/chatroom');
-
-    /* We can refactor by extracting:
-     * credentials,
-     * user creation,
-     * user persisting
+    /**
+     * Controller of register page.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    try {
-      // $this->userCredentials().
-      $userName = htmlentities($request->get('_username'), ENT_QUOTES);
-      $password = htmlentities($request->get('_password'), ENT_QUOTES);
+    public function register(Request $request): Response
+    {
+        $this->init('You\'r already loggedIn', '/chatroom');
 
-      // $this->createUser($userName, $password).
-      $newUser = new User();
-      $newUser->setName($userName);
-      $newUser->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        /* We can refactor by extracting:
+         * credentials,
+         * user creation,
+         * user persisting
+         */
+        try {
+            // $this->userCredentials().
+            $userName = htmlentities($request->get('_username'), ENT_QUOTES);
+            $password = htmlentities($request->get('_password'), ENT_QUOTES);
 
-      // $this->persist($newUser).
-      $userRepository = new UserRepository();
-      $userRepository->save($newUser);
+            // $this->createUser($userName, $password).
+            $newUser = new User();
+            $newUser->setName($userName);
+            $newUser->setPassword(password_hash($password, PASSWORD_DEFAULT));
+
+            // $this->persist($newUser).
+            $userRepository = new UserRepository();
+            $userRepository->save($newUser);
+        } catch (\Exception $e) {
+            // In future use LOGGER service.
+            echo $e->getMessage();
+        }
+
+        return new RedirectResponse('/chatroom');
     }
-    catch (\Exception $e) {
-      // In future use LOGGER service.
-      echo $e->getMessage();
+
+    /**
+     * Controller of register form page.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registerForm(): Response
+    {
+        $this->init('You\'r already loggedIn', '/chatroom');
+        return $this->render('register.html.twig');
     }
-
-    return new RedirectResponse('/chatroom');
-  }
-
-  /**
-   * Controller of register form page.
-   *
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function registerForm(): Response
-  {
-    $this->init('You\'r already loggedIn', '/chatroom');
-    return $this->render('register.html.twig');
-  }
-
 }

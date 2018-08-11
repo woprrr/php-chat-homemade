@@ -14,10 +14,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class AppKernel implements HttpKernelInterface
 {
-
-  public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true): Response
-  {
-    switch ($request->getPathInfo()) {
+    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true): Response
+    {
+        switch ($request->getPathInfo()) {
       case '/':
         $response = new HomePage();
         $response = $response->index();
@@ -72,7 +71,6 @@ class AppKernel implements HttpKernelInterface
         $response = new Response('Not found !', Response::HTTP_NOT_FOUND);
     }
 
-    return $response;
-  }
-
+        return $response;
+    }
 }

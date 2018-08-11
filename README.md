@@ -89,19 +89,9 @@ cd php-chat
 │   ├── Dockerfile.nginx
 │   ├── Dockerfile.varnish
 │   ├── bin
-│   │   ├── doctrine -> ../vendor/doctrine/orm/bin/doctrine
-│   │   ├── doctrine-dbal -> ../vendor/doctrine/dbal/bin/doctrine-dbal
-│   │   ├── pdepend -> ../vendor/pdepend/pdepend/src/bin/pdepend
-│   │   ├── phpcbf -> ../vendor/squizlabs/php_codesniffer/bin/phpcbf
-│   │   ├── phpcs -> ../vendor/squizlabs/php_codesniffer/bin/phpcs
-│   │   ├── phpmd -> ../vendor/phpmd/phpmd/src/bin/phpmd
-│   │   └── phpunit -> ../vendor/phpunit/phpunit/phpunit
 │   ├── composer.json
 │   ├── composer.lock
 │   ├── docker
-│   │   ├── nginx
-│   │   ├── php
-│   │   └── varnish
 │   ├── phpunit.xml.dist
 │   ├── public
 │   │   └── index.php
@@ -115,23 +105,6 @@ cd php-chat
 │   │   └── Views
 │   ├── tests
 │   └── vendor
-│       ├── autoload.php
-│       ├── composer
-│       ├── doctrine
-│       ├── myclabs
-│       ├── pdepend
-│       ├── phar-io
-│       ├── phpdocumentor
-│       ├── phpmd
-│       ├── phpspec
-│       ├── phpunit
-│       ├── psr
-│       ├── sebastian
-│       ├── squizlabs
-│       ├── symfony
-│       ├── theseer
-│       ├── twig
-│       └── webmozart
 ├── docker-compose.yml
 └── h2-proxy
     ├── Dockerfile
@@ -156,7 +129,7 @@ ___
 
 3. Open your favorite browser :
 
-    * [http://localhost:8080](http://localhost:8080/  (Web Front).
+    * [http://localhost:8080](http://localhost:8080/)  (Web Front).
     * [http://localhost:8081](http://localhost:8081/) (Web Front Varnished).
     * [https://localhost](https://localhost) (Web Front HTTPS).
-    * [http://localhost:2000](http://localhost:2000/) Adminer (username: chat, password: chat)
+    * [http://localhost:2000](http://localhost:2000/?pgsql=db&username=chat&db=chat_app&ns=public) Adminer (username: chat, password: chat)

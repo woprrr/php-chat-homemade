@@ -1,4 +1,4 @@
-# Makefile for Symfony 4 skeleton docker.
+# Makefile for project.
 
 # Shell colors.
 RED=\033[0;31m
@@ -18,31 +18,19 @@ NC=\033[0m
 help:
 	@echo "\n${ORANGE}usage: make ${BLUE}COMMAND${NC}"
 	@echo "\n${YELLOW}Commands:${NC}"
-	@echo "  ${BLUE}php-cs-fixer          : ${LIGHT_BLUE}Check Symfony Coding standard.${NC}"
-	@echo "  ${BLUE}c-install             : ${LIGHT_BLUE}Install PHP/Drupal dependencies with composer.${NC}"
-	@echo "  ${BLUE}c-update              : ${LIGHT_BLUE}Update PHP/Drupal dependencies with composer.${NC}"
+	@echo "  ${BLUE}c-install             : ${LIGHT_BLUE}Install PHP/Project dependencies with composer.${NC}"
 	@echo "  ${BLUE}docker-start          : ${LIGHT_BLUE}Create and start containers.${NC}"
 	@echo "  ${BLUE}docker-stop           : ${LIGHT_BLUE}Stop and clear all services.${NC}"
 	@echo "  ${BLUE}logs                  : ${LIGHT_BLUE}Follow log output.${NC}"
-
-init:
-	@echo "${BLUE}Project configuration initialization:${NC}"
-	@$(shell cp -n $(shell pwd)/docker-compose.yml.dist $(shell pwd)/docker-compose.yml 2> /dev/null)
-	@$(shell cp -n $(shell pwd)/symfony/composer.json.dist $(shell pwd)/symfony/composer.json 2> /dev/null)
-
-php-cs-fixer:
-	@echo "Checking the standard code..."
-	@docker-compose exec -T php php-cs-fixer fix /src/ --dry-run
-
-c-update:
-	@echo "${BLUE}Updating your application dependencies:${NC}"
-	@docker-compose exec -T php composer update
 
 c-install:
 	@echo "${BLUE}Installing your application dependencies:${NC}"
 	@docker-compose exec -T php composer install
 
-docker-start: init
+import-db-project:
+	cat app1/docker/sql/dump/chat_app.sql | docker-compose exec -T db psql -U chat chat_app
+
+docker-start:
 	@echo "${BLUE}Starting all containers:${NC}"
 	@docker-compose up -d
 
@@ -53,4 +41,4 @@ docker-stop:
 logs:
 	@docker-compose logs -f
 
-.PHONY: test php-cs-fixer init
+.PHONY: test

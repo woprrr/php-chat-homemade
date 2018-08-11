@@ -14,21 +14,20 @@ class Config
    * Database host
    * @var string
    */
-  const DB_HOST = 'db';
-  /**
-   * Database name
-   * @var string
-   */
-  const DB_NAME = 'chat_app';
-  /**
-   * Database user
-   * @var string
-   */
-  const DB_USER = 'chat';
-  /**
-   * Database password
-   * @var string
-   */
-  const DB_PASSWORD = 'chat';
-
+    const DB_HOST = 'db';
+    /**
+     * Database name
+     * @var string
+     */
+    const DB_NAME = 'chat_app';
+    /**
+     * Database user
+     * @var string
+     */
+    const DB_USER = 'chat';
+    /**
+     * Database password
+     * @var string
+     */
+    const DB_PASSWORD = 'chat';
 }

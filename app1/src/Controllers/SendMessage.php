@@ -13,25 +13,22 @@ use App\Models\MessageRepository;
  */
 class SendMessage
 {
+    use BaseControllerTrait;
 
-  use BaseControllerTrait;
+    /**
+     * Controller used to persist messages from database.
+     *
+     * @param \App\Models\Message $newMessage The new message instance to persist.
+     */
+    protected function sendMessage(Message $newMessage): void
+    {
+        try {
+            $messageRepo = new MessageRepository();
+            $messageRepo->save($newMessage);
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
 
-  /**
-   * Controller used to persist messages from database.
-   *
-   * @param \App\Models\Message $newMessage The new message instance to persist.
-   */
-  protected function sendMessage(Message $newMessage): void
-  {
-    try {
-      $messageRepo = new MessageRepository();
-      $messageRepo->save($newMessage);
+        $this->setNotice("Message correctly added.");
     }
-    catch (\PDOException $e) {
-      echo $e->getMessage();
-    }
-
-    $this->setNotice("Message correctly added.");
-  }
-
 }

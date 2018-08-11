@@ -12,23 +12,21 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HomePage
 {
+    use BaseControllerTrait;
 
-  use BaseControllerTrait;
+    /**
+     * Redirect from login page if not connected or general room if logged in.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function index(): Response
+    {
+        $this->init();
+        $userId = $this->session->get('userId');
+        if (empty($userId)) {
+            return new RedirectResponse('/login');
+        }
 
-  /**
-   * Redirect from login page if not connected or general room if logged in.
-   *
-   * @return \Symfony\Component\HttpFoundation\Response
-   */
-  public function index(): Response
-  {
-    $this->init();
-    $userId = $this->session->get('userId');
-    if (empty($userId)) {
-      return new RedirectResponse('/login');
+        return new RedirectResponse('/chatroom');
     }
-
-    return new RedirectResponse('/chatroom');
-  }
-
 }

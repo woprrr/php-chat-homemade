@@ -60,7 +60,3 @@ RUN composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-pr
 	&& composer clear-cache
 
 COPY . ./
-
-RUN mkdir -p var/cache var/logs var/sessions \
-	&& composer dump-autoload --classmap-authoritative --no-dev \
-	&& chown -R www-data var
