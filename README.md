@@ -121,10 +121,10 @@ ___
     make docker-start
     ```
 
-2. Initialize/Install project dependencies :
+2. Import the SQL dump :
 
     ```sh
-    make docker-start
+    make import-db-project
     ```
 
 3. Open your favorite browser :
@@ -133,3 +133,18 @@ ___
     * [http://localhost:8081](http://localhost:8081/) (Web Front Varnished).
     * [https://localhost](https://localhost) (Web Front HTTPS).
     * [http://localhost:2000](http://localhost:2000/?pgsql=db&username=chat&db=chat_app&ns=public) Adminer (username: chat, password: chat)
+
+Enjoy !!
+```
+ /\     /\
+{  `---'  }
+{  O   O  }
+~~>  V  <~~
+ \  \|/  /
+  `-----'____
+  /     \    \_
+ {       }\  )_\_   _
+ |  \_/  |/ /  \_\_/ )
+  \__/  /(_/     \__/
+    (__/
+`
