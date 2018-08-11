@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="panel panel-info">
+                    {% block headline %}
+                        <div class="panel-heading">Public Chat History</div>
+                    {% endblock %}
+                    <div class="panel-body">
+                        <ul class="media-list">
+                            {% for key,message in content.messages %}
+                                <li class="media">
+                                    <div class="media-body">
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </a>
+                                                <div class="media-body">
+                                                    <p>{{ message.getText }}</p>
+                                                    <small class="text-muted">{{ message.getUserName }} | {{ message.getCreatedAt|date('m/d/Y', 'UTC') }}</small>
+                                                    <hr/>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <form method="post" class="form-send-messages col-12" action="/sendPublicMessage">
+                                <input type="text" name="_text" class="form-control col-10" style="float: left;" placeholder="Entrer un Message" required autofocus>
+                                <input class="btn btn-info" type="submit" name="send_message" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Utilisateurs
+                    </div>
+                    <div class="panel-body">
+                        <ul class="media-list">
+                            {% for key,user in users %}
+                                <li class="media">
+                                    <div class="media-body">
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </a>
+                                            <div class="media-body">
+                                                <h5>{{ user.getName }} | User </h5>
+                                                <small class="text-muted">Active From 3 hours</small>
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

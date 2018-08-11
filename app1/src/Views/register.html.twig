@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <main class="bd-content p-5" role="main">
+        <div class="container">
+            <form method="post" class="form-signin" action="/save">
+                <h2 class="form-signin-heading">Register</h2>
+                <label for="username" class="sr-only">Username:</label>
+                <input type="text" id="username" name="_username" class="form-control" placeholder="Pseudo" required autofocus>
+                <label for="password" class="sr-only">Password:</label>
+                <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" required>
+                <input type="hidden" name="_target_path" value="" />
+                <input class="btn btn-lg btn-primary btn-block" name="register" type="submit" />
+            </form>
+        </div>
+    </main>
+{% endblock %}
