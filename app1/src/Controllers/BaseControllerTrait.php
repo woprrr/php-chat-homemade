@@ -106,6 +106,9 @@ trait BaseControllerTrait
     /**
      * Initialize the session and perform common checks for controllers.
      *
+     * In this project we need to manage sessions manually,
+     * instead of use session.auto_start in php.ini.
+     *
      * @param string $message     The message to display during init.
      * @param string $redirectUri The uri to redirect client if not loggedIn.
      */
